@@ -48,6 +48,18 @@ app.use('/log', (req, res) => {
     proxyMySQLRequest(req, res, req.originalUrl);
 });
 
+app.use('/order', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
+app.use('/client', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
+app.use('/events', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
 app.listen(port, () => {
     console.log(`API Gateway is running on port ${port}`);
 });
