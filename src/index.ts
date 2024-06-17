@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import helmet from 'helmet';
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const backendMongoDBPort = process.env.BACKEND_MONGODB_PORT || 5001;
 const host = process.env.HOST || 'localhost';
 
 app.use(express.json());
+app.use(helmet());
+
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
