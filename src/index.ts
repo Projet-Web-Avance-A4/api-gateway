@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import helmet from 'helmet';
 
 dotenv.config();
 
@@ -28,11 +29,10 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-};
+}
 
+app.use(express.json());
+app.use(helmet());
 
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -64,6 +64,18 @@ app.use('/auth', (req, res) => {
 });
 
 app.use('/log', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
+app.use('/order', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
+app.use('/client', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
+app.use('/events', (req, res) => {
     proxyMySQLRequest(req, res, req.originalUrl);
 });
 
