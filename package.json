@@ -1,9 +1,9 @@
 {
   "name": "api-gateway",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node app/index.ts",
+    "start": "ts-node src/index.ts",
     "build": "tsc",
     "dev": "nodemon"
   },
@@ -22,6 +22,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17"
+    "@types/cors": "^2.8.17",
+    "tsx": "^4.15.4"
   }
 }
