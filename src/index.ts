@@ -10,13 +10,31 @@ const backendMySQLPort = process.env.BACKEND_MYSQL_PORT || 5000;
 const backendMongoDBPort = process.env.BACKEND_MONGODB_PORT || 5001;
 const host = process.env.HOST || 'localhost';
 
+const allowedOrigins = [
+    'http://localhost:3001',
+    'http://localhost:3002',
+    'http://localhost:3003',
+    'http://localhost:3004',
+    'http://localhost:3005',
+    'http://localhost:3006',
+    'http://localhost:3007'
+];
+
+const corsOptions = {
+    origin: (origin: any, callback: any) => {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+}
+
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
+app.use(helmet());
+
+app.use(express.json());
+app.use(cors(corsOptions));
 
 async function proxyMySQLRequest(req: any, res: any, path: any) {
     const url = `http://${host}:${backendMySQLPort}${path}`;
