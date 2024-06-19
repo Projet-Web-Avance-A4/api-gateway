@@ -18,7 +18,9 @@ const allowedOrigins = [
     'http://localhost:3004',
     'http://localhost:3005',
     'http://localhost:3006',
-    'http://localhost:3007'
+    'http://localhost:3007',
+    'http://localhost:5000',
+    'http://localhost:5001'
 ];
 
 const corsOptions = {
