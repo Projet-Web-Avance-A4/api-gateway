@@ -18,7 +18,9 @@ const allowedOrigins = [
     'http://localhost:3004',
     'http://localhost:3005',
     'http://localhost:3006',
-    'http://localhost:3007'
+    'http://localhost:3007',
+    'http://localhost:5000',
+    'http://localhost:5001'
 ];
 
 const corsOptions = {
@@ -103,6 +105,10 @@ app.use('/events', (req, res) => {
 app.use('/product', (req, res) => {
     proxyMySQLRequest(req, res, req.originalUrl);
 });
+app.use('/notifications', (req, res) => {
+    proxyMongoDBRequest(req, res, req.originalUrl);
+});
+
 app.listen(port, () => {
     console.log(`API Gateway is running on port ${port}`);
 });
