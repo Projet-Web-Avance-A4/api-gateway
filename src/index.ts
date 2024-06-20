@@ -105,6 +105,14 @@ app.use('/events', (req, res) => {
 app.use('/product', (req, res) => {
     proxyMySQLRequest(req, res, req.originalUrl);
 });
+app.use('/menu', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
+app.use('/article', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
+
 app.use('/notifications', (req, res) => {
     proxyMongoDBRequest(req, res, req.originalUrl);
 });
