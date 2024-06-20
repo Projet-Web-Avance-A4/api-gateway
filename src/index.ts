@@ -35,7 +35,6 @@ const corsOptions = {
 
 app.use(express.json());
 app.use(helmet());
-
 app.use(express.json());
 app.use(cors(corsOptions));
 
@@ -103,6 +102,9 @@ app.use('/events', (req, res) => {
     proxyMySQLRequest(req, res, req.originalUrl);
 });
 
+app.use('/product', (req, res) => {
+    proxyMySQLRequest(req, res, req.originalUrl);
+});
 app.use('/menu', (req, res) => {
     proxyMySQLRequest(req, res, req.originalUrl);
 });
