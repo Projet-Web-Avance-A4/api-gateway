@@ -9,7 +9,8 @@ const app = express();
 const port = process.env.PORT || 4000;
 const backendMySQLPort = process.env.BACKEND_MYSQL_PORT || 5000;
 const backendMongoDBPort = process.env.BACKEND_MONGODB_PORT || 5001;
-const host = process.env.HOST || 'localhost';
+const hostMySQL = process.env.HOST_MYSQL || 'localhost';
+const hostMongoDB = process.env.HOST_MONGODB || 'localhost';
 
 const allowedOrigins = [
     'http://localhost:3001',
@@ -40,12 +41,12 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 async function proxyMySQLRequest(req: any, res: any, path: any) {
-    const url = `http://${host}:${backendMySQLPort}${path}`;
+    const url = `http://${hostMySQL}:${backendMySQLPort}${path}`;
     const options = {
         method: req.method,
         headers: {
             ...req.headers,
-            host: host,
+            host: hostMySQL,
             port: backendMySQLPort,
         },
         body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined,
@@ -62,12 +63,12 @@ async function proxyMySQLRequest(req: any, res: any, path: any) {
 }
 
 async function proxyMongoDBRequest(req: any, res: any, path: any) {
-    const url = `http://${host}:${backendMongoDBPort}${path}`;
+    const url = `http://${hostMongoDB}:${backendMongoDBPort}${path}`;
     const options = {
         method: req.method,
         headers: {
             ...req.headers,
-            host: host,
+            host: hostMongoDB,
             port: backendMongoDBPort,
         },
         body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined,
